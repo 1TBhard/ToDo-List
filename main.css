@@ -11,6 +11,7 @@
   height: 100px;
   background-color: cornflowerblue;
 
+  letter-spacing: 2px;
   justify-content: center;
   align-items: center;
 }
@@ -73,7 +74,7 @@ form input[type="submit"]:hover {
   height: 100%;
   list-style: none;
   
-  font-size: 1.7em;
+  font-size: 25px;
   border-style: solid;
 }
 
@@ -83,22 +84,39 @@ form input[type="submit"]:hover {
   justify-content: space-between;
 }
 
-.letter {
+.todo-list .letter, .todo-list input {
   width: 60%;
   word-wrap: break-word;
 }
 
-.btn-wrapper {
-  width: 30%;
-  display: flex;
+.todo-list input {
+  display: none;
 }
 
-.btn-wrapper > span {
-  margin: 0;
-  right: 0;
+/* =========== edit 버튼 누른 경우 =========== */
+
+.editable .letter {
+  display: none;
+}
+
+.editable input {
+  display: block;
+  border: solid 1px black;
+}
+/* ========================================== */
+
+.btn-wrapper {
+  width: 40%;
+  display: flex;
+  justify-content: space-evenly;
 }
 
 .btn-wrapper button {
+  justify-content: flex-end;
+
+  top: 0;
+  padding: 0 5px;
+
   height: 100%;
   align-items: center;
   border-radius: 5px;
@@ -106,15 +124,15 @@ form input[type="submit"]:hover {
   font-weight: 600;
   letter-spacing: 1.5px;
   outline: none;          /* 클릭시 나오는 보더 데코레이터 삭제 */
-  cursor: pointer;
   border: none;
-
-  opacity: 1;
-  transition: 0.3s;
+  
+  
+  cursor: pointer;
+  transition: 0.5s;
 }
 
-.btn-wrapper button:hover {
-  opacity: 1.5;
+.btn-wrapper span {
+  
 }
 
 [name='done'] {

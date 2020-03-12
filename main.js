@@ -14,26 +14,33 @@ function setLocalStorage() {
 }
 
 // 테스크 완료해서 .done 으로 토글할 경우
-function toggleDone() {
-  const parentLi = this.parentElement;
-  console.log(this.parentElement);
-  
-  parentLi.classList.toggle('done');
-
-  if(parentLi.classList.contains('done'))
-    parentLi.querySelector('[name="done"]').textContent = 'Done';
+function toggleDone(i) {
+  if(tasksInfo[i].class_list.includes('done'))
+    tasksInfo[i].class_list = tasksInfo[i].class_list.replace('done', '').trim();
   else
-    parentLi.querySelector('[name="done"]').textContent = 'UnDone';
-  
+    tasksInfo[i].class_list += ' done';
+
+  reDraw();
   caculateLeftWork();
   setLocalStorage();
+
 }
 
-// 테스크 edit 할 경우
+// 테스크 edit 할 경우(edit 중)
 function editTask(i) {
-  // this.parentElement.classList.toggle('done');
-  caculateLeftWork();
-  setLocalStorage();
+  const parent = document.querySelectorAll('.todo-list li')[i];
+  const tagetLetter = parent.querySelector('.letter');
+
+  parent.classList.toggle('editable');
+
+  const btn = parent.querySelector('[name="edit"]');
+
+  if(parent.classList.contains('editable')) {
+    btn.textContent = 'Save';
+  }
+  else {
+    btn.textContent = 'Edit';
+  }
 }
 
 // 테스크 지우는 경우
@@ -54,14 +61,16 @@ function caculateLeftWork() {
 
 // 다시 todo 리스트를 재설정한다.
 function reDraw() {
+  console.log(tasksInfo)
   document.querySelector('.todo-list ul').innerHTML= tasksInfo.map(t => {
       return `<li class=${t.class_list}>
-        <div class="letter">${t.letter}</div>
-        <div class="btn-wrapper">
-          <button name="done">${t.class_list.includes('done') ? 'Done' : 'UnDone'}</button>
-          <button name="edit">Edit</button>
-          <button name="delete">Delete</button>
-        </div>
+          <div class="letter" disabled />${t.letter}</div>
+          <input value="${t.letter}" />
+          <div class="btn-wrapper">
+            <span><button name="done">${t.class_list.includes('done') ? 'Done' : 'UnDone'}</button></span>
+            <span><button name="edit">Edit</button></span>
+            <span><button name="delete">Delete</button></span>
+          </div>
       </li>`
     }).join('');
   
@@ -74,9 +83,9 @@ function reDraw() {
     const editBtn = task.querySelector('button[name="edit"]');
     const deleteBtn = task.querySelector('button[name="delete"]');
   
-    letter.addEventListener('click', toggleDone);
-    doneBtn.addEventListener('click', toggleDone);
-    editBtn.addEventListener('click', editTask(i));
+    letter.addEventListener('click', () => toggleDone(i));
+    doneBtn.addEventListener('click', () => toggleDone(i));
+    editBtn.addEventListener('click', () => editTask(i));
     deleteBtn.addEventListener('click', () => deleteTask(i));
   });
 
@@ -84,10 +93,12 @@ function reDraw() {
 }
 
 
-reDraw();
-
 function addTask(e) {
   e.preventDefault();
+
+  if(this.userInput.value === '') {
+    return;
+  }
 
   const n_data = {
     'letter': this.userInput.value,
@@ -100,4 +111,7 @@ function addTask(e) {
   this.reset();
 }
 
-document.querySelector('form').addEventListener('submit', addTask)
+document.querySelector('form').addEventListener('submit', addTask);
+
+reDraw();
+
