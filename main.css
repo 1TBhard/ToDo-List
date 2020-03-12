@@ -1,0 +1,148 @@
+@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Nanum Gothic';
+}
+
+#head h1{
+  display: flex;
+  height: 100px;
+  background-color: cornflowerblue;
+
+  justify-content: center;
+  align-items: center;
+}
+
+.main-wrapper {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+form {
+  height: 30px;
+  display: flex;
+  justify-content: space-between;
+}
+
+form > * {
+  max-height: 100%;
+  font-size: 1.2rem;
+}
+
+form input {
+  width: 70%;
+}
+
+form input[type="submit"] {
+  width: 20%;
+  border: 2px solid darkgray;
+  border-radius: 5px;
+
+  color: black;
+  background-color: white;
+
+  font-weight: 700;
+
+  text-align: center;
+  letter-spacing: 2px;
+  text-decoration: none;
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+form input[type="submit"]:hover {
+  background-color: #40a5c7;
+}
+
+#task-count {
+  margin-top: 20px;
+  padding: 5px;
+  background-color: darkseagreen;
+
+  font-weight: 700;
+  font-size: 1.3rem;
+}
+
+.todo-list {
+  margin-top: 20px;
+  width: 600px;
+  height: 100%;
+  list-style: none;
+  
+  font-size: 1.7em;
+  border-style: solid;
+}
+
+.todo-list li {
+  margin: 10px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.letter {
+  width: 60%;
+  word-wrap: break-word;
+}
+
+.btn-wrapper {
+  width: 30%;
+  display: flex;
+}
+
+.btn-wrapper > span {
+  margin: 0;
+  right: 0;
+}
+
+.btn-wrapper button {
+  height: 100%;
+  align-items: center;
+  border-radius: 5px;
+  color: white;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  outline: none;          /* 클릭시 나오는 보더 데코레이터 삭제 */
+  cursor: pointer;
+  border: none;
+
+  opacity: 1;
+  transition: 0.3s;
+}
+
+.btn-wrapper button:hover {
+  opacity: 1.5;
+}
+
+[name='done'] {
+  background-color: orange;
+}
+
+.done [name='done'] {
+  background-color: green;
+}
+
+[name='edit'] {
+  background-color: #0F4C81;
+}
+
+[name='delete'] {
+  background-color: #D92121;
+}
+
+.important .letter {
+  color: red;
+  font-weight: 700;
+}
+
+.done .letter{
+  color: gray;
+  text-decoration: line-through;
+}
+
+.letter:hover {
+  background-color: gainsboro;
+}
