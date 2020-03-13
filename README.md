@@ -1,8 +1,6 @@
 # ToDo-List
 
-<center>
-    <img src='main_pic.gif'></img>
-</center>
+
 
 기본적인 ToDo List 입니다.
 vanilla script, html, css 만을 이용하였습니다.
