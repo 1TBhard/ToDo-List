@@ -51,8 +51,6 @@ form input[type="submit"] {
   letter-spacing: 2px;
   text-decoration: none;
   cursor: pointer;
-
-  transition: 0.3s;
 }
 
 form input[type="submit"]:hover {
@@ -70,12 +68,12 @@ form input[type="submit"]:hover {
 
 .todo-list {
   margin-top: 20px;
-  width: 600px;
+  width: 700px;
   height: 100%;
   list-style: none;
   
-  font-size: 25px;
   border-style: solid;
+  border-width: 3px 0px 3px 0px;
 }
 
 .todo-list li {
@@ -85,11 +83,13 @@ form input[type="submit"]:hover {
 }
 
 .todo-list .letter, .todo-list input {
-  width: 60%;
+  font-size: 25px;
+  width: 55%;
   word-wrap: break-word;
 }
 
 .todo-list input {
+  height: 28px;
   display: none;
 }
 
@@ -107,6 +107,7 @@ form input[type="submit"]:hover {
 
 .btn-wrapper {
   width: 40%;
+  height: 30px;
   display: flex;
   justify-content: space-evenly;
 }
@@ -116,23 +117,24 @@ form input[type="submit"]:hover {
 
   top: 0;
   padding: 0 5px;
-
   height: 100%;
+
   align-items: center;
   border-radius: 5px;
   color: white;
+  font-size: 15px;
   font-weight: 600;
   letter-spacing: 1.5px;
+  
   outline: none;          /* 클릭시 나오는 보더 데코레이터 삭제 */
   border: none;
   
-  
   cursor: pointer;
-  transition: 0.5s;
 }
 
 .btn-wrapper span {
-  
+  width: 100%;
+  justify-content: flex-end;
 }
 
 [name='done'] {
@@ -151,14 +153,10 @@ form input[type="submit"]:hover {
   background-color: #D92121;
 }
 
-.important .letter {
-  color: red;
-  font-weight: 700;
-}
-
 .done .letter{
   color: gray;
   text-decoration: line-through;
+  text-decoration-color: black;
 }
 
 .letter:hover {

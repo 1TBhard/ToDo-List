@@ -3,7 +3,7 @@ const tasksInfo = getLocalStorage();
 // 로컬 스토리지에서 get
 function getLocalStorage() {
   // string 데이터를 JSON.parse() 로 객체화
-  return JSON.parse(localStorage.getItem('tasks'));
+  return JSON.parse(localStorage.getItem('tasks')) || [];
 }
 
 // 로컬 스토리지에서 set
@@ -23,23 +23,25 @@ function toggleDone(i) {
   reDraw();
   caculateLeftWork();
   setLocalStorage();
-
 }
 
 // 테스크 edit 할 경우(edit 중)
 function editTask(i) {
   const parent = document.querySelectorAll('.todo-list li')[i];
-  const tagetLetter = parent.querySelector('.letter');
 
   parent.classList.toggle('editable');
 
   const btn = parent.querySelector('[name="edit"]');
 
+  console.log('edit 버튼 클릭');
+  // 수정 중
   if(parent.classList.contains('editable')) {
     btn.textContent = 'Save';
-  }
-  else {
+  } else {  // 수정 완료(저장)
+    console.log('edit 완료');
+    tasksInfo[i].letter = parent.querySelector('input').value;
     btn.textContent = 'Edit';
+    reDraw();
   }
 }
 
@@ -82,11 +84,16 @@ function reDraw() {
     const doneBtn = task.querySelector('button[name="done"]');
     const editBtn = task.querySelector('button[name="edit"]');
     const deleteBtn = task.querySelector('button[name="delete"]');
+    const letterInput = task.querySelector('input');
   
     letter.addEventListener('click', () => toggleDone(i));
     doneBtn.addEventListener('click', () => toggleDone(i));
     editBtn.addEventListener('click', () => editTask(i));
     deleteBtn.addEventListener('click', () => deleteTask(i));
+    letterInput.addEventListener('keydown', (e) => {
+      if(e.keyCode == 13) // 엔터 누른 경우
+        editTask(i);
+    });
   });
 
   caculateLeftWork();
@@ -96,6 +103,7 @@ function reDraw() {
 function addTask(e) {
   e.preventDefault();
 
+  // 아무것도 입력되지 않은 상태에서 엔터 누를 때
   if(this.userInput.value === '') {
     return;
   }
@@ -109,6 +117,7 @@ function addTask(e) {
   tasksInfo.push(n_data);
   reDraw();
   this.reset();
+  setLocalStorage();
 }
 
 document.querySelector('form').addEventListener('submit', addTask);
