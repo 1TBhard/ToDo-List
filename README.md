@@ -1,6 +1,6 @@
 # ToDo-List
 
-<src width="600px" src="main_pic.gif" />
+![](main_pic.gif)
 
 기본적인 ToDo List 입니다.
 vanilla script, html, css 만을 이용하였습니다.
